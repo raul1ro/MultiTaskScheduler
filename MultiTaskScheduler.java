@@ -207,7 +207,8 @@ public class MultiTaskScheduler implements AutoCloseable{
 				long nextNS = task.nextNS;
 
 				//if now moment is after the next moment of the task.
-				if(now >= nextNS){
+				//nanoTime() might overflow, so use it via difference.
+				if(now - nextNS >= 0){
 
 					//if the task is not busy
 					// make it busy and execute
